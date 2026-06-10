@@ -44,13 +44,17 @@ func main() {
 		fmt.Println("Tarefa criada:", newTask.Title)
 
 	case "list":
-		for _, task := range service.List() {
-			status := "pendente"
-			if task.Done {
-				status = "concluída"
-			}
+		if len(service.List()) == 0 {
+			fmt.Println("Lista de tarefas vazia")
+		} else {
+			for _, task := range service.List() {
+				status := "pendente"
+				if task.Done {
+					status = "concluída"
+				}
 
-			fmt.Printf("[%d] %s - %s\n", task.Id, task.Title, status)
+				fmt.Printf("[%d] %s - %s\n", task.Id, task.Title, status)
+			}
 		}
 
 	case "done":
